@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name = "BasicTeleOp", group = "TeleOp")
 public class BasicTeleOp extends OpMode {
-    PotatoRobot robot = new PotatoRobot();
+    WaxedLightlyWeatheredCutCopperStairsRobot robot = new WaxedLightlyWeatheredCutCopperStairsRobot();
 
     @Override
     public void init() {
