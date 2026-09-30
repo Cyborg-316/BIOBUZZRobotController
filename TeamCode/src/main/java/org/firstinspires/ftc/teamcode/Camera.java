@@ -33,6 +33,7 @@ public class Camera {
     }
 
     public void update() {
+        //REMEBER TO UPDATE THIS FOR CAMERA LATER
         currentlyInSight = false;
 
         x = 0;
@@ -47,21 +48,21 @@ public class Camera {
 
         ArrayList<AprilTagDetection> detections = tagProcessor.getDetections();
 
-        for (AprilTagDetection tag : detections) {
-            if (tag.id == 20 || tag.id == 24) {
-                x = tag.ftcPose.x;
-                y = tag.ftcPose.y;
-                z = tag.ftcPose.z;
-                roll = tag.ftcPose.roll;
-                pitch = tag.ftcPose.pitch;
-                yaw = tag.ftcPose.yaw;
-                id = tag.id;
-
-                currentlyInSight = true;
-
-                break;
-            }
-        }
+//        for (AprilTagDetection tag : detections) {
+//            if (tag.id == 20 || tag.id == 24) {
+//                x = tag.ftcPose.x;
+//                y = tag.ftcPose.y;
+//                z = tag.ftcPose.z;
+//                roll = tag.ftcPose.roll;
+//                pitch = tag.ftcPose.pitch;
+//                yaw = tag.ftcPose.yaw;
+//                id = tag.id;
+//
+//                currentlyInSight = true;
+//
+//                break;
+//            }
+//        }
     }
 
     @Override
