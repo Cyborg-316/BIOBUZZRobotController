@@ -212,7 +212,10 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
         blDrivePower = (drive - strafe + turn);
         brDrivePower = (drive + strafe - turn);
 
-
+        frontLeft.setPower(flDrivePower);
+        frontRight.setPower(frDrivePower);
+        backLeft.setPower(blDrivePower);
+        backRight.setPower(brDrivePower);
         
 
         /****************** CODE ENDS HERE ******************/
