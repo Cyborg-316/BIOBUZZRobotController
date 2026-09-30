@@ -44,7 +44,6 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
 
         // Set reverse motors
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //encoders
         setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -192,28 +191,63 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
         /****************** TASK ******************/
 
         // Code the following:
-        // When B pressed brake
+        // When B pressed, brake
         // When left trigger or right trigger pressed, speed up and slow down respectively
         // Have minimum power ex. 0.3, 0.4, etc.
 
         /****************** CODE STARTS HERE ******************/
-
         
+        if (gp1.b) {
+            brake();
+        } else {
+            double multiplier = 1.0;
+            if (gp1.left_trigger > 0.1) {
+                multiplier = 1.5;
+            } else if (gp1.right_trigger > 0.1) {
+                multiplier = 0.3;
+            }
 
-        //Use the below code to process the joystick inputs to movement
-        //You can change or modify the below code
-        final double drive = (-gp1.left_stick_y);
-        final double turn = (gp1.right_stick_x);
-        final double strafe = (gp1.left_stick_x);
+            final double drive = (-gp1.left_stick_y);
+            final double turn = (gp1.right_stick_x);
+            final double strafe = (gp1.left_stick_x);
+    
+            //math to determine power - uses mecanum wheel equation
+            flDrivePower = (drive + strafe + turn);
+            frDrivePower = (drive - strafe - turn);
+            blDrivePower = (drive - strafe + turn);
+            brDrivePower = (drive + strafe - turn);
 
-        //math to determine power - uses mecanum wheel equation
-        flDrivePower = (drive + strafe + turn);
-        frDrivePower = (drive - strafe - turn);
-        blDrivePower = (drive - strafe + turn);
-        brDrivePower = (drive + strafe - turn);
+            //spaget
+            if (flDrivePower > 0) {
+                flDrivePower = Math.max(0.3, flDrivePower);
+            } else if (flDrivePower < 0){
+                flDrivePower = Math.min(-0.3, flDrivePower);
+            }
 
+            if (frDrivePower > 0) {
+                frDrivePower = Math.max(0.3, frDrivePower);
+            } else if (frDrivePower < 0){
+                frDrivePower = Math.min(-0.3, frDrivePower);
+            }
 
-        
+            if (blDrivePower > 0) {
+                blDrivePower = Math.max(0.3, blDrivePower);
+            } else if (blDrivePower < 0){
+                blDrivePower = Math.min(-0.3, blDrivePower);
+            }
+
+            if (brDrivePower > 0) {
+                brDrivePower = Math.max(0.3, brDrivePower);
+            } else if (brDrivePower < 0){
+                brDrivePower = Math.min(-0.3, brDrivePower);
+            }
+
+            frontLeft.setPower(flDrivePower * multiplier);
+            frontRight.setPower(frDrivePower * multiplier);
+            backLeft.setPower(blDrivePower * multiplier);
+            backRight.setPower(brDrivePower * multiplier);
+        }
+  
 
         /****************** CODE ENDS HERE ******************/
         
