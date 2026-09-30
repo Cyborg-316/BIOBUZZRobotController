@@ -44,7 +44,6 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
 
         // Set reverse motors
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //encoders
         setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -194,7 +193,7 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
         // Code the following:
         // When B pressed brake
         // When left trigger or right trigger pressed, speed up and slow down respectively
-        // Have minimum power ex. 0.3, 0.4, etc.
+        // Have minimum power be 0.3
 
         /****************** CODE STARTS HERE ******************/
 
