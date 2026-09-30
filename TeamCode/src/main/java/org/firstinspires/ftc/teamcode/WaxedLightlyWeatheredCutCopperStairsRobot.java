@@ -44,7 +44,6 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
 
         // Set reverse motors
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //encoders
         setDriveMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
