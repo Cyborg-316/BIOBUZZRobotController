@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "BasicTeleOp", group = "TeleOp")
-public class BasicTeleOp extends OpMode {
+@TeleOp(name = "BasicTeleop", group = "TeleOp")
+public class BasicTeleop extends OpMode {
     WaxedLightlyWeatheredCutCopperStairsRobot robot = new WaxedLightlyWeatheredCutCopperStairsRobot();
 
     @Override
