@@ -166,15 +166,57 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
     public void gamePadPower(Gamepad gp1, Gamepad gp2, Telemetry telemetry) {
         odo.update();
 //        camera.update();
-        if (gp1.b){
-            staybot();
-        } else {
-            if (gyroDrive) {
-                gyroDrive(gp1);
-            } else {
-                driving(gp1);
-            }
-        }
+
+        /****************** QUICK REFERENCE ******************/
+        
+        // left stick y-axis = gp1.left_stick_y
+        // left stick x-axis = gp1.left_stick_x
+        // right stick y-axis = gp1.right_stick_y
+        // right stick x-axis = gp1.right_stick_x
+    
+        // left trigger = gp1.left_trigger
+        // right trigger = gp1.right_trigger
+        // left bumper = gp1.left_bumper
+        // right bumper = gp1.right_bumper
+    
+        // a button = gp1.a
+        // b button = gp1.b
+        // x button = gp1.x
+        // y button = gp1.y
+    
+        // dpad up = gp1.dpad_up
+        // dpad down = gp1.dpad_down
+        // dpad left = gp1.dpad_left
+        // dpad right = gp1.dpad_right
+
+        /****************** TASK ******************/
+
+        // Code the following:
+        // When B pressed brake
+        // When left trigger or right trigger pressed, speed up and slow down respectively
+        // Have minimum power ex. 0.3, 0.4, etc.
+
+        /****************** CODE STARTS HERE ******************/
+
+        
+
+        //Use the below code to process the joystick inputs to movement
+        //You can change or modify the below code
+        final double drive = (-gp1.left_stick_y);
+        final double turn = (gp1.right_stick_x);
+        final double strafe = (gp1.left_stick_x);
+
+        //math to determine power - uses mecanum wheel equation
+        flDrivePower = (drive + strafe + turn);
+        frDrivePower = (drive - strafe - turn);
+        blDrivePower = (drive - strafe + turn);
+        brDrivePower = (drive + strafe - turn);
+
+
+        
+
+        /****************** CODE ENDS HERE ******************/
+        
         if (gp1.dpad_down){
             desiredPose = odo.getPosition();
         }
@@ -196,82 +238,12 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
     }
 
     public void driving(Gamepad gp1) {
-        //uses driver input to speedup/slowdown as needed
-        double multiplier = Math.max(0.3, 1 - gp1.right_trigger);
-        double speedMode = (gp1.left_trigger);
-
-        //gets joystick input
-        double slowdown = 1.5;
-        final double drive = (-gp1.left_stick_y);
-        final double turn = (gp1.right_stick_x);
-        final double strafe = (gp1.left_stick_x);
-
-        //math to determine power - uses mecanum wheel equation
-        flDrivePower = (drive + strafe + turn);
-        frDrivePower = (drive - strafe - turn);
-        blDrivePower = (drive - strafe + turn);
-        brDrivePower = (drive + strafe - turn);
-
-        double imuPos = yaw(DEGREES);
-
-        if (speedMode > 0.1) {
-            slowdown = 1;
-        }
-
-        //factor in slowdown and speedup
-        frontLeft.setPower(flDrivePower * multiplier / slowdown);
-        frontRight.setPower(frDrivePower * multiplier / slowdown);
-        backLeft.setPower(blDrivePower * multiplier / slowdown);
-        backRight.setPower(brDrivePower * multiplier / slowdown);
+        //no looking
+        
     }
 
     public void gyroDrive(Gamepad gp1) {
-        //gyro driving function
-
-        //reset button - zeroes the gyro
-        if (gp1.y == true) {
-            imu.resetYaw();
-        }
-
-        //get IMU
-        double imuPos = (yaw(RADIANS));
-
-        //math - uses trig functions to find the power for each motor
-        double change = Math.cos(-imuPos);
-        double sine = Math.sin(-imuPos);
-
-        double drive = (-gp1.left_stick_y);
-        double strafe = (gp1.left_stick_x);
-        double turn = (gp1.right_stick_x);
-
-        double driveCos = change * drive;
-        double driveSin = sine * drive;
-        double strafeSin = sine * strafe;
-        double strafeCos = change * strafe;
-
-        //divided by 1.5 is to account for strafing being slower than driving forward
-        double actualDrive = (driveCos + strafeSin) / 1.5;
-        double actualStrafe = -driveSin + strafeCos;
-
-        //set power
-        flDrivePower = (actualDrive + actualStrafe + turn);
-        frDrivePower = (actualDrive - actualStrafe - turn);
-        blDrivePower = (actualDrive - actualStrafe + turn);
-        brDrivePower = (actualDrive + actualStrafe - turn);
-
-        double slowdown = 0.85;
-
-        //adds or removes speed based on user input
-        if (gp1.right_trigger >= 0.1) {
-            slowdown = 0.25;
-        } else if (gp1.left_trigger >= 0.1) {
-            slowdown = 1.25;
-        }
-
-        frontLeft.setPower(flDrivePower * slowdown);
-        frontRight.setPower(frDrivePower * slowdown);
-        backLeft.setPower(blDrivePower * slowdown);
-        backRight.setPower(brDrivePower * slowdown);
+        //no looking v2
 
     }
 
