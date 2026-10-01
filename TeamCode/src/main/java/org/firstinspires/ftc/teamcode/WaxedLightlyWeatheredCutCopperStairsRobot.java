@@ -201,7 +201,7 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
 
         //Use the below code to process the joystick inputs to movement
         //You can change or modify the below code
-        final double drive = (-gp1.left_stick_y);
+        final  double drive = (-gp1.left_stick_y);
         final double turn = (gp1.right_stick_x);
         final double strafe = (gp1.left_stick_x);
 
@@ -211,12 +211,83 @@ public class WaxedLightlyWeatheredCutCopperStairsRobot {
         blDrivePower = (drive - strafe + turn);
         brDrivePower = (drive + strafe - turn);
 
-        frontLeft.setPower(flDrivePower);
-        frontRight.setPower(frDrivePower);
-        backLeft.setPower(blDrivePower);
-        backRight.setPower(brDrivePower);
         
 
+        
+        
+        if(gp1.b)
+           {
+           flDrivePower = (0) ;
+           frDrivePower = (0);
+           blDrivePower = (0);
+           brDrivePower = (0);
+           }
+        else if(gp1.right_bumper)
+           {
+              if(f1DrivePower >= 0.3 || f1DrivePower <= -0.3)
+              {
+                 flDrivePower *= 0.9;
+              }
+              if(frDrivePower >= 0.3 || frDrivePower <= -0.3)
+              {
+                 frDrivePower *= 0.9;
+              }
+              if(blDrivePower >= 0.3 || frDrivePower <= -0.3)
+              {
+                 blDrivePower *= 0.9;
+              }
+              if(brDrivePower >= 0.3 || frDrivePower <= -0.3)
+              {
+                 brDrivePower *= 0.9;
+              }
+           }
+       else if(gp1.left_bumper)
+           {
+              if(gp1.left_bumper >= 0)
+              { 
+                 
+                 flDrivePower *= 1.5;
+                 frDrivePower *= 1.5;
+                 blDrivePower *= 1.5;
+                 brDrivePower *= 1.5;
+              
+              if(f1DrivePower >= 0.3 || f1DrivePower <= -0.3)
+              {
+                 flDrivePower *= 1.5;
+              }
+              if(frDrivePower >= 0.3 || frDrivePower <= -0.3)
+              {
+                 frDrivePower *= 1.5;
+              }
+              if(blDrivePower >= 0.3 || frDrivePower <= -0.3)
+              {
+                 blDrivePower *= 1.5;
+              }
+              if(brDrivePower >= 0.3 || frDrivePower <= -0.3)
+              {
+                 brDrivePower *= 1.5;
+              }
+              if(abs(f1DrivePower) < 0.2)
+              {
+                 f1DrivePower *= 3.5
+              }
+              if(abs(frDrivePower) < 0.2)
+              {
+                 frDrivePower *= 3.5;
+              }
+              if(abs(blDrivePower) < 0.2)
+              {
+                 blDrivePower *= 3.5;
+              }
+              if(abs(brDrivePower) < 0.2)
+              {
+                 brDrivePower *= 3.5;
+              }
+           } 
+           
+        
+        
+    }
         /****************** CODE ENDS HERE ******************/
         
 //        if (gp1.dpad_down){
